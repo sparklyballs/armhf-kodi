@@ -1,0 +1,77 @@
+diff -upr xbmc-16.0-Jarvis.orig/configure.ac xbmc-16.0-Jarvis/configure.ac
+--- xbmc-16.0-Jarvis.orig/configure.ac	2016-03-19 07:28:05.389703445 +0100
++++ xbmc-16.0-Jarvis/configure.ac	2016-03-19 07:35:44.771669064 +0100
+@@ -564,7 +564,7 @@ case $host in
+      use_x11=no
+      build_shared_lib=yes    
+      ;;
+-  i*86*-linux-gnu*|i*86*-*-linux-uclibc*)
++  i*86*-linux-gnu*|i*86*-*-linux-uclibc*|i*86*-linux-musl*)
+      target_platform=target_linux
+      ARCH="i486-linux"
+      if test "$use_cpu" = "no" -a "$cross_compiling" = "yes";  then
+@@ -586,7 +586,7 @@ case $host in
+        fi
+      fi
+      ;;
+-  x86_64-*-linux-gnu*|x86_64-*-linux-uclibc*)
++  x86_64-*-linux-gnu*|x86_64-*-linux-uclibc*|x86_64-*-linux-musl*)
+      target_platform=target_linux
+      ARCH="x86_64-linux"
+      if test "$use_cpu" = "no" -a "$cross_compiling" = "yes";  then
+@@ -645,7 +645,7 @@ case $host in
+   powerpc64-*-linux-gnu*|powerpc64-*-linux-uclibc*)
+      ARCH="powerpc64-linux"
+      ;;
+-  arm*-*-linux-gnu*|arm*-*-linux-uclibc*)
++  arm*-*-linux-gnu*|arm*-*-linux-uclibc*|arm*-*-linux-musl*)
+      target_platform=target_linux
+      ARCH="arm"
+      use_arch="arm"
+diff -upr xbmc-16.0-Jarvis.orig/m4/xbmc_arch.m4 xbmc-16.0-Jarvis/m4/xbmc_arch.m4
+--- xbmc-16.0-Jarvis.orig/m4/xbmc_arch.m4	2016-02-20 16:21:19.000000000 +0100
++++ xbmc-16.0-Jarvis/m4/xbmc_arch.m4	2016-03-19 07:37:37.070660659 +0100
+@@ -2,10 +2,10 @@ AC_DEFUN([XBMC_SETUP_ARCH_DEFINES],[
+ 
+ # build detection and setup - this is the native arch
+ case $build in
+-  i*86*-linux-gnu*|i*86*-*-linux-uclibc*)
++  i*86*-linux-gnu*|i*86*-*-linux-uclibc*|i*86*-linux-musl*)
+      AC_SUBST(NATIVE_ARCH_DEFINES, "-DTARGET_POSIX -DTARGET_LINUX -D_LINUX")
+      ;;
+-  x86_64-*-linux-gnu*|x86_64-*-linux-uclibc*)
++  x86_64-*-linux-gnu*|x86_64-*-linux-uclibc*|x86_64-*-linux-musl*)
+      AC_SUBST(NATIVE_ARCH_DEFINES, "-DTARGET_POSIX -DTARGET_LINUX -D_LINUX")
+      ;;
+   i386-*-freebsd*)
+@@ -23,7 +23,7 @@ case $build in
+   powerpc64-*-linux-gnu*|powerpc64-*-linux-uclibc*)
+      AC_SUBST(NATIVE_ARCH_DEFINES, "-DTARGET_POSIX -DTARGET_LINUX -D_LINUX -D_POWERPC64")
+      ;;
+-  arm*-*-linux-gnu*|arm*-*-linux-uclibc*)
++  arm*-*-linux-gnu*|arm*-*-linux-uclibc*|arm*-*-linux-musl*)
+      AC_SUBST(NATIVE_ARCH_DEFINES, "-DTARGET_POSIX -DTARGET_LINUX -D_LINUX")
+      ;;
+   *)
+@@ -33,10 +33,10 @@ esac
+ 
+ # host detection and setup - this is the target arch
+ case $host in
+-  i*86*-linux-gnu*|i*86*-*-linux-uclibc*)
++  i*86*-linux-gnu*|i*86*-*-linux-uclibc*|*i*86*-linux-musl*)
+      AC_SUBST(ARCH_DEFINES, "-DTARGET_POSIX -DTARGET_LINUX -D_LINUX")
+      ;;
+-  x86_64-*-linux-gnu*|x86_64-*-linux-uclibc*)
++  x86_64-*-linux-gnu*|x86_64-*-linux-uclibc*|x86_64-*-linux-musl*)
+      AC_SUBST(ARCH_DEFINES, "-DTARGET_POSIX -DTARGET_LINUX -D_LINUX")
+      ;;
+   i386-*-freebsd*)
+@@ -60,7 +60,7 @@ case $host in
+   powerpc64-*-linux-gnu*|powerpc64-*-linux-uclibc*)
+      AC_SUBST(ARCH_DEFINES, "-DTARGET_POSIX -DTARGET_LINUX -D_LINUX -D_POWERPC64")
+      ;;
+-  arm*-*-linux-gnu*|arm*-*-linux-uclibc*)
++  arm*-*-linux-gnu*|arm*-*-linux-uclibc*|arm*-linux-musl*)
+      AC_SUBST(ARCH_DEFINES, "-DTARGET_POSIX -DTARGET_LINUX -D_LINUX")
+      ;;
+   mips*-*-linux-gnu*|mips*-*-linux-uclibc*)
