@@ -1,4 +1,4 @@
-FROM sparklyballs/armhf-vanilla
+FROM sparklyballs/base-vanilla-armhf
 
 # change to tag of build you want
 ARG KODI_CHECKOUT="16.1-Jarvis"
