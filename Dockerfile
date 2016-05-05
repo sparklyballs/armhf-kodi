@@ -27,6 +27,7 @@ x264-dev x265-dev xdpyinfo yajl-dev yasm-dev zip"
 ARG APKLIST="ffmpeg-libs freetype fribidi glew glu jasper libmicrohttpd libpcrecpp \
 libpng libsmbclient libssh libuuid libxml2 libxslt lzo mariadb-libs py-bluez python \
 taglib tiff tinyxml xrandr yajl"
+
 # install build dependencies
 RUN apk add --update $BUILD_LIST && \
 
