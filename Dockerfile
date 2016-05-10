@@ -76,9 +76,3 @@ COPY root/ /
 VOLUME /config/.kodi
 EXPOSE 8080 9777/udp
 
-
-
-
-
-
-
