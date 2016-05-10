@@ -8,10 +8,11 @@ ARG KODI_VER=16.1
 # copy in patches
 COPY patches/ /patches/
 
-# set build dependencies
-ARG BUILD_LIST="afpfs-ng-dev alpine-sdk alsa-lib-dev autoconf automake \
-avahi-dev bluez-dev boost-dev boost-thread bsd-compat-headers bzip2-dev \
-cmake coreutils curl-dev dbus-dev eudev-dev faac-dev ffmpeg-dev findutils \
+# install build dependencies
+RUN apk add --no-cache --virtual=build-dependencies afpfs-ng-dev \
+alpine-sdk alsa-lib-dev autoconf automake avahi-dev bluez-dev \
+boost-dev boost-thread bsd-compat-headers bzip2-dev cmake \
+coreutils curl-dev dbus-dev eudev-dev faac-dev ffmpeg-dev findutils \
 flac-dev freetype-dev fribidi-dev gawk gettext-dev giflib-dev glew-dev \
 glu-dev gnutls-dev gperf hicolor-icon-theme jasper-dev lame-dev libass-dev \
 libbluray-dev libcap-dev libcdio-dev libcec-dev libgcrypt-dev libjpeg-turbo-dev \
@@ -21,15 +22,7 @@ libva-dev libvorbis-dev libxmu-dev libxrandr-dev libxslt-dev libxt-dev lzo-dev \
 m4 mariadb-dev mesa-demos mesa-dev nasm openjdk7-jre-base pcre-dev py-bluez \
 py-pillow py-simplejson python python-dev rtmpdump-dev samba-dev sdl-dev \
 sdl_image-dev sqlite-dev swig taglib-dev tiff-dev tinyxml-dev udisks2-dev \
-x264-dev x265-dev xdpyinfo yajl-dev yasm-dev zip"
-
-# set runtime dependencies
-ARG APKLIST="ffmpeg-libs freetype fribidi glew glu jasper libmicrohttpd libpcrecpp \
-libpng libsmbclient libssh libuuid libxml2 libxslt lzo mariadb-libs py-bluez python \
-taglib tiff tinyxml xrandr yajl"
-
-# install build dependencies
-RUN apk add --update $BUILD_LIST && \
+x264-dev x265-dev xdpyinfo yajl-dev yasm-dev zip && \
 
 # fetch kodi source
 curl -o /tmp/kodi.tar.gz -L https://github.com/xbmc/xbmc/archive/$KODI_VER-$KODI_NAME.tar.gz && \
@@ -68,10 +61,12 @@ make && \
 make install && \
 
 # cleanup build dependencies
-apk del --purge $BUILD_LIST && \
+apk del --purge build-dependencies && \
 
 # install runtime dependencies, clean cache and source files
-apk add --update $APKLIST && \
+apk add --no-cache ffmpeg-libs freetype fribidi glew glu jasper libmicrohttpd libpcrecpp \
+libpng libsmbclient libssh libuuid libxml2 libxslt lzo mariadb-libs py-bluez python \
+taglib tiff tinyxml xrandr yajl && \
 rm -rf /var/cache/apk/* /tmp/*
 
 # copy local files for runtime
@@ -80,6 +75,7 @@ COPY root/ /
 # ports and volumes
 VOLUME /config/.kodi
 EXPOSE 8080 9777/udp
+
 
 
 
