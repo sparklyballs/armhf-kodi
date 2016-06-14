@@ -12,7 +12,6 @@ COPY patches/ /patches/
 RUN \
  apk add --no-cache --virtual=build-dependencies \
 	afpfs-ng-dev \
-	alpine-sdk \
 	alsa-lib-dev \
 	autoconf \
 	automake \
@@ -32,9 +31,12 @@ RUN \
 	flac-dev \
 	freetype-dev \
 	fribidi-dev \
+	g++ \
 	gawk \
+	gcc \
 	gettext-dev \
 	giflib-dev \
+	git \
 	glew-dev \
 	glu-dev \
 	gnutls-dev \
@@ -69,6 +71,7 @@ RUN \
 	libxt-dev \
 	lzo-dev \
 	m4 \
+	make \
 	mariadb \
 	mariadb-dev \
 	mesa-demos \
