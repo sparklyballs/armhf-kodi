@@ -174,7 +174,7 @@ RUN \
 
 # install runtime dependencies, clean cache and source files
  apk add --no-cache \
-	ffmpeg-libs \
+	ffmpeg2.8-libs \
 	freetype \
 	fribidi \
 	glew \
