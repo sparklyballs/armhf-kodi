@@ -191,6 +191,7 @@ RUN \
 	lzo \
 	mariadb-client-libs \
 	mariadb-libs \
+	mesa-gles \
 	py-bluez \
 	python \
 	taglib \
