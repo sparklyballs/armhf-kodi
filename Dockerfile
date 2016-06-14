@@ -27,6 +27,7 @@ RUN \
 	dbus-dev \
 	eudev-dev \
 	faac-dev \
+	ffmpeg-dev \
 	findutils \
 	flac-dev \
 	freetype-dev \
@@ -161,7 +162,8 @@ RUN \
 		--localstatedir=/var \
 		--mandir=/usr/share/man \
 		--prefix=/usr \
-		--sysconfdir=/etc && \
+		--sysconfdir=/etc \
+		--with-ffmpeg=shared && \
 
 # compile kodi
  make && \
