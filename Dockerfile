@@ -27,7 +27,7 @@ RUN \
 	dbus-dev \
 	eudev-dev \
 	faac-dev \
-	ffmpeg-dev \
+	ffmpeg2.8-dev \
 	findutils \
 	flac-dev \
 	freetype-dev \
