@@ -23,6 +23,7 @@ RUN \
 	bzip2-dev \
 	cmake \
 	coreutils \
+	curl \
 	curl-dev \
 	dbus-dev \
 	eudev-dev \
