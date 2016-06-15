@@ -176,6 +176,7 @@ RUN \
 
 # install runtime dependencies, clean cache and source files
  apk add --no-cache \
+	curl \
 	ffmpeg2.8-libs \
 	freetype \
 	fribidi \
